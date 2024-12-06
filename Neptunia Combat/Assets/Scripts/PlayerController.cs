@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private PlayerBaseState currentState;
+    private IdleState idleState;
     private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
+        currentState = idleState;
         animator = GetComponent<Animator>();
     }
 
@@ -16,6 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         var inputLightAttack = Input.GetButtonDown("Mouse0");
         var inputBlock = Input.GetButton("Mouse1");
+        currentState.UpdateState(this);
 
         Debug.Log("InputLightAttack: " + inputLightAttack);
         Debug.Log("InputBlock: " + inputBlock);
